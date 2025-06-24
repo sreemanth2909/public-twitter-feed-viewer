@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X Feed Viewer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <div class="popup-header">
+      <h2>X Feed Viewer</h2>
+      <div class="logo">👥</div>
+    </div>
+    
+    <!-- Current Feed Section -->
+    <div class="current-feed" style="margin-bottom: 8px;">
+      <div class="section-title">Current Feed</div>
+      <button class="feed-btn active">
+        <span class="feed-icon">🏠</span>
+        <span class="feed-name">My Feed</span>
+      </button>
+    </div>
+    
+    <!-- Fetch Token Section -->
+    <div class="fetch-section" style="margin-bottom: 10px;">
+      <div class="section-title">Quick Fetch</div>
+      <button id="fetchTokenBtn" class="fetch-btn">
+        <span class="fetch-icon">🔍</span>
+        <span class="fetch-text">Fetch My Tokens</span>
+      </button>
+      <div class="fetch-info">
+        <small>Automatically extract tokens from X.com using Twikit</small>
+      </div>
+    </div>
+    
+    <!-- Available Accounts Section -->
+    <div class="accounts-section">
+      <div class="section-title">Available Accounts</div>
+      <ul id="userList" class="accounts-list">
+        <!-- Accounts will be populated by JavaScript as list items -->
+      </ul>
+      <button id="enterBtn" class="enter-btn" disabled>
+        <span class="enter-icon">➡️</span>
+        <span class="enter-text">Enter Feed</span>
+      </button>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Processing...</div>
+    </div>
+    <!-- Status for backend-driven workflow -->
+    <div id="status" style="margin-top:10px;color:#007bff;"></div>
+  </div>
+  
+  <script src="utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Get Your X.com Authentication Token</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; margin: 0 auto; max-width: 800px; padding: 20px; color: #333; }
+        h1, h2 { color: #1d9bf0; }
+        code { background-color: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+        .warning { background-color: #fffbe6; border: 1px solid #ffe58f; padding: 15px; border-radius: 4px; }
+        .warning strong { color: #d46b08; }
+        .step { margin-bottom: 2rem; }
+        img { max-width: 100%; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px; }
+        pre { background-color: #f4f4f4; padding: 15px; border-radius: 4px; white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <h1>How to Find Your X.com Authentication Token</h1>
+    
+    <div class="warning">
+        <strong>Security Warning:</strong> Your authentication token provides complete read access to your account. It is like a temporary password. 
+        Only share it with people you trust completely. The person you share it with will be able to see your feed exactly as you do.
+    </div>
+
+    <h2>Overview</h2>
+    <p>To allow a friend to view your X.com feed, you need to provide them with a "token". This isn't a single piece of text, but a small block of code containing three keys from your browser session. Follow the steps below carefully to find them.</p>
+
+    <div class="step">
+        <h2>Step 1: Open Developer Tools</h2>
+        <p>Go to <a href="https://x.com" target="_blank">x.com</a> and make sure you are logged in. Once the page has loaded, open your browser's Developer Tools. You can usually do this by pressing <strong>F12</strong> or by right-clicking on the page and selecting <strong>"Inspect"</strong>.</p>
+    </div>
+
+    <div class="step">
+        <h2>Step 2: Go to the Network Tab</h2>
+        <p>In the Developer Tools window, find and click on the <strong>"Network"</strong> tab. This tab shows all the network requests your browser makes.</p>
+    </div>
+
+    <div class="step">
+        <h2>Step 3: Find the "HomeTimeline" Request</h2>
+        <p>In the "Filter" or "Search" bar within the Network tab, type <code>HomeTimeline</code>. This will help you find the specific API request that fetches your feed. You may need to refresh the page or scroll down on your feed for this request to appear.</p>
+        <p>Click on the request in the list. Its name will look something like <code>AbCdEfGhIjKlMnOpQrSt-HomeTimeline</code>.</p>
+    </div>
+
+    <div class="step">
+        <h2>Step 4: Copy the Request Headers</h2>
+        <p>With the "HomeTimeline" request selected, look for a new panel that shows details about it. Click on the <strong>"Headers"</strong> tab within this panel.</p>
+        <p>Scroll down until you find the <strong>Request Headers</strong> section. Here you need to find and copy two values:</p>
+        <ul>
+            <li><code>authorization</code></li>
+            <li><code>x-csrf-token</code></li>
+        </ul>
+        <p>Copy the full value for each one, including the word "Bearer" for the authorization header.</p>
+    </div>
+
+    <div class="step">
+        <h2>Step 5: Find the `auth_token` Cookie</h2>
+        <p>Now, click on the <strong>"Cookies"</strong> tab for the same "HomeTimeline" request.</p>
+        <p>Look through the list of cookies until you find the one named <code>auth_token</code>. Copy its corresponding "Value".</p>
+    </div>
+
+    <div class="step">
+        <h2>Step 6: Assemble the JSON Token</h2>
+        <p>You now have three pieces of information. You need to assemble them into a JSON object. Copy the template below and paste it into a text editor.</p>
+        <pre><code>{
+  "authorization": "PASTE_YOUR_AUTHORIZATION_HEADER_VALUE_HERE",
+  "csrfToken": "PASTE_YOUR_X-CSRF-TOKEN_HEADER_VALUE_HERE",
+  "authToken": "PASTE_YOUR_AUTH_TOKEN_COOKIE_VALUE_HERE"
+}</code></pre>
+        <p>Replace the placeholder text with the values you copied in the previous steps. Make sure to keep the quotation marks!</p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 7: Share the Token</h2>
+        <p>Your final JSON object is your complete authentication token. Copy the entire block of text and send it securely to the person you want to share your feed with. They will be able to paste this into the X Feed Viewer extension.</p>
+    </div>
+
+</body>
+</html> 

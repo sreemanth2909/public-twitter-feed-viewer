@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "X Feed Viewer",
+  "version": "1.0.0",
+  "description": "View someone else's X (Twitter) home feed by sharing their real authentication token.",
+  "permissions": [
+    "storage",
+    "declarativeNetRequest",
+    "cookies",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.x.com/*",
+    "*://*.twitter.com/*",
+    "*://*.twikit.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "X Feed Viewer",
+    "default_icon": {
+      "16": "icons/icon16.svg",
+      "48": "icons/icon48.svg",
+      "128": "icons/icon128.svg"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.svg",
+    "48": "icons/icon48.svg",
+    "128": "icons/icon128.svg"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["content.css"],
+      "matches": ["https://x.com/*", "https://twitter.com/*"]
+    }
+  ]
+}
